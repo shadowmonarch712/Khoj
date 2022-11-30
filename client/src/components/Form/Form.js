@@ -10,8 +10,8 @@ import {
 } from "@mui/material";
 import FileBase from "react-file-base64";
 import { createRequest, updateRequest } from "../../actions/requests";
-import { useDispatch } from "react-redux";
-import {useSelector} from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+
 const Form = ({currentId, setCurrentId}) => {
   const [requestData, setRequestData] = useState({
     name: "",
@@ -22,18 +22,43 @@ const Form = ({currentId, setCurrentId}) => {
   const request = useSelector((state)=>currentId ? state.requests.find((p)=>p._id===currentId):null);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem('profile'));
+
   useEffect(()=>{
     if(request) setRequestData(request);
   },[request])
-  const handleSubmit = (e) => {
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if(currentId){
+  //     dispatch(updateRequest(currentId, requestData));
+  //   }else{
+  //     dispatch(createRequest(requestData));
+  //   }
+  //   clear();
+  // };
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if(currentId){
-      dispatch(updateRequest(currentId, requestData));
-    }else{
-      dispatch(createRequest(requestData));
+
+    if (currentId === 0) {
+      dispatch(createRequest({ ...requestData, name: user?.result?.name }));
+      clear();
+    } else {
+      dispatch(updateRequest(currentId, { ...requestData, name: user?.result?.name }));
+      clear();
     }
-    clear();
   };
+
+  if (!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align="center">
+          Please Sign In to create your own memories and like other's memories.
+        </Typography>
+      </Paper>
+    );
+  }
+  
   const clear = () => {
       setCurrentId(null);
       setRequestData({

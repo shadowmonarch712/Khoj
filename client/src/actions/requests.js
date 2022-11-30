@@ -29,7 +29,8 @@ export const updateRequest = (id, request) => async (dispatch) => {
       console.log(error.message);
     }
   };
-  export const deleteRequest = (id) => async (dispatch) => {
+
+export const deleteRequest = (id) => async (dispatch) => {
     try {
       await api.deleteRequest(id);
   

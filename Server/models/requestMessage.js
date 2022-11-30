@@ -3,6 +3,7 @@ import mongoose, { Mongoose } from "mongoose";
 const requestSchema = mongoose.Schema({
     title: String,
     message: String,
+    name: String,
     creator: String,
     tags: [String],
      createdAt: {

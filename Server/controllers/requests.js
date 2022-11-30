@@ -14,11 +14,12 @@ export const getRequests = async (req,res)=>{
 
 export const createRequest = async (req,res)=>{
     const request = req.body;
-    const newRequest = new RequestMessage(request);
+    // const newRequest = new RequestMessage(request);
+    const newRequestMessage = new RequestMessage({ ...request, creator: req.userId, createdAt: new Date().toISOString() })
 
     try {
-        await newRequest.save();  
-        res.status(201).json(newRequest);  
+        await newRequestMessage.save();  
+        res.status(201).json(newRequestMessage);  
     } catch (error) {
         res.status(409).json({message: error.message});
     }
@@ -26,6 +27,7 @@ export const createRequest = async (req,res)=>{
 
 export const getRequest = async (req, res) => { 
     const { id } = req.params;
+    
 
     try {
         const request = await RequestMessage.findById(id);
