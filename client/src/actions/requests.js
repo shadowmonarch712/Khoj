@@ -1,6 +1,16 @@
 // import { FETCH_ALL, CREATE, UPDATE, DELETE} from '../constants/actionTypes';
-import { START_LOADING, END_LOADING, FETCH_ALL, FETCH_REQUEST, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE} from '../constants/actionTypes';
-import * as api from '../api';
+import {
+  START_LOADING,
+  END_LOADING,
+  FETCH_ALL,
+  FETCH_REQUEST,
+  FETCH_BY_SEARCH,
+  CREATE,
+  UPDATE,
+  DELETE,
+  COMMENT
+} from "../constants/actionTypes";
+import * as api from "../api";
 
 //Action creators
 export const getRequest = (id) => async (dispatch) => {
@@ -21,16 +31,21 @@ export const getRequest = (id) => async (dispatch) => {
 //         const {data} = await api.fetchRequests();
 //         dispatch({type:FETCH_ALL, payload: data});
 //     } catch (error) {
-//         console.log(error.message);   
+//         console.log(error.message);
 //     }
 // }
 
 export const getRequests = (page) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
-    const { data: { data, currentPage, numberOfPages } } = await api.fetchRequests(page);
+    const {
+      data: { data, currentPage, numberOfPages },
+    } = await api.fetchRequests(page);
 
-    dispatch({ type: FETCH_ALL, payload: { data, currentPage, numberOfPages } });
+    dispatch({
+      type: FETCH_ALL,
+      payload: { data, currentPage, numberOfPages },
+    });
     dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
@@ -40,7 +55,9 @@ export const getRequests = (page) => async (dispatch) => {
 export const getRequestsBySearch = (searchQuery) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
-    const { data: { data } } = await api.fetchRequestsBySearch(searchQuery);
+    const {
+      data: { data },
+    } = await api.fetchRequestsBySearch(searchQuery);
 
     dispatch({ type: FETCH_BY_SEARCH, payload: { data } });
     dispatch({ type: END_LOADING });
@@ -49,33 +66,44 @@ export const getRequestsBySearch = (searchQuery) => async (dispatch) => {
   }
 };
 
-export const createRequest = (request)=> async (dispatch)=>{
-    try {
-        const {data} = await api.createRequest(request);
-        dispatch({type:CREATE , payload : data})
-    } catch (error) {
-        console.log(error.message);
-    }
-}
+export const createRequest = (request) => async (dispatch) => {
+  try {
+    const { data } = await api.createRequest(request);
+    dispatch({ type: CREATE, payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 export const updateRequest = (id, request) => async (dispatch) => {
-    try {
-      const { data } = await api.updateRequest(id, request);
-  
-      dispatch({ type: UPDATE, payload: data });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  try {
+    const { data } = await api.updateRequest(id, request);
 
+    dispatch({ type: UPDATE, payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const commentRequest = (value, id) => async (dispatch) => {
+  try {
+    const { data } = await api.comment(value, id);
+
+    dispatch({ type: COMMENT, payload: data });
+
+    return data.comments;
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const deleteRequest = (id) => async (dispatch) => {
-    try {
-      await api.deleteRequest(id);
-  
-      dispatch({ type: DELETE, payload: id });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-  
+  try {
+    await api.deleteRequest(id);
+
+    dispatch({ type: DELETE, payload: id });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 export default getRequests;

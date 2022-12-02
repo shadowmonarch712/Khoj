@@ -1,5 +1,5 @@
 import express from 'express';
-import { getRequests, createRequest, updateRequest, getRequest,deleteRequest,getRequestsBySearch } from '../controllers/requests.js';
+import { getRequests, createRequest, updateRequest, getRequest,deleteRequest,getRequestsBySearch, commentRequest } from '../controllers/requests.js';
 
 const router = express.Router();
 
@@ -9,4 +9,5 @@ router.post('/', createRequest);
 router.get('/:id', getRequest);
 router.patch('/:id', updateRequest);
 router.delete('/:id', deleteRequest);
+router.post('/:id/commentRequest', commentRequest);
 export default router;  

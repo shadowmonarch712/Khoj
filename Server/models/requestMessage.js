@@ -6,6 +6,7 @@ const requestSchema = mongoose.Schema({
     name: String,
     creator: String,
     tags: [String],
+    comments: {type: [String], default: []},
      createdAt: {
         type: Date,
         default: new Date()

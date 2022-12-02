@@ -18,7 +18,7 @@
 // };
 
 
-import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_REQUEST, CREATE, UPDATE, DELETE} from '../constants/actionTypes';
+import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_REQUEST, CREATE, UPDATE, DELETE,COMMENT} from '../constants/actionTypes';
 
 export default (state = { isLoading: true, requests: [] }, action) => {
   switch (action.type) {
@@ -49,9 +49,17 @@ export default (state = { isLoading: true, requests: [] }, action) => {
     case CREATE:
       return { ...state, requests: [...state.requests, action.payload] };
     case UPDATE:
-      return { ...state, requests: state.requests.map((post) => (post._id === action.payload._id ? action.payload : post)) };
+      return { ...state, requests: state.requests.map((request) => (request._id === action.payload._id ? action.payload : request)) };
     case DELETE:
-      return { ...state, requests: state.requests.filter((post) => post._id !== action.payload) };
+      return { ...state, requests: state.requests.filter((request) => request._id !== action.payload) };
+    case COMMENT:
+      return {...state,
+         requests: state.requests.map((request) => {
+          if(request._id===action.payload._id) return action.payload;
+
+          return request;
+      }),
+    };
     default:
       return state;
   }

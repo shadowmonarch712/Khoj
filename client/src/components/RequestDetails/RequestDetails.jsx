@@ -3,6 +3,7 @@ import { Paper, Typography, CircularProgress, Divider } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { useParams, useNavigate } from 'react-router-dom';
+import CommentSection from './CommentSection';
 
 import { getRequest, getRequestsBySearch } from '../../actions/requests';
 import useStyles from './styles';
@@ -50,6 +51,7 @@ const RequestDetails = () => {
           <Typography gutterBottom variant="body1" component="p">{request.message}</Typography>
           <Typography variant="h6">Created by: {request.name}</Typography>
           <Typography variant="body1">{moment(request.createdAt).fromNow()}</Typography>
+          <CommentSection request={request}/>
           <Divider style={{ margin: '20px 0' }} />
         </div>
         {/* <div className={classes.imageSection}>

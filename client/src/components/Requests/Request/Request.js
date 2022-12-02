@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
+import NorthEastIcon from '@mui/icons-material/NorthEast';
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import moment from "moment";
 import { useDispatch } from "react-redux";
@@ -101,7 +102,7 @@ const Request = ({ request, setCurrentId }) => {
           color="secondary"
           onClick={openRequest}
         >
-          <DeleteIcon fontSize="small" /> View
+          <NorthEastIcon fontSize="small" /> View
         </Button>
       </CardActions>
     </Card>

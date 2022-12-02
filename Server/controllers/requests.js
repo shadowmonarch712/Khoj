@@ -90,3 +90,16 @@ export const deleteRequest = async (req, res) => {
 
     res.json({ message: "Request deleted successfully." });
 }
+
+export const commentRequest = async (req, res) => {
+    const { id } = req.params;
+    const { value } = req.body;
+
+    const request = await RequestMessage.findById(id);
+
+    request.comments.push(value);
+
+    const updatedRequest = await RequestMessage.findByIdAndUpdate(id, request, { new: true });
+
+    res.json(updatedRequest);
+};
