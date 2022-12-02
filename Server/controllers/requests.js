@@ -2,15 +2,45 @@ import RequestMessage from '../models/requestMessage.js';
 import mongoose from 'mongoose';
 // const ObjectId = require('mongoose').Types.ObjectId;
 
-export const getRequests = async (req,res)=>{
+// export const getRequests = async (req,res)=>{
+//     try {
+//         const requestMessages = await RequestMessage.find();
+//         res.status(200).json(requestMessages);
+//         console.log(requestMessages);
+//     } catch (error) {
+//         res.status(404).json({message: error.message});
+//     }
+// }   
+
+export const getRequests = async (req, res) => {
+    const { page } = req.query;
+    
     try {
-        const requestMessages = await RequestMessage.find();
-        res.status(200).json(requestMessages);
-        console.log(requestMessages);
-    } catch (error) {
-        res.status(404).json({message: error.message});
+        const LIMIT = 8;
+        const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
+    
+        const total = await RequestMessage.countDocuments({});
+        const requests = await RequestMessage.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
+
+        res.json({ data: requests, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
+    } catch (error) {    
+        res.status(404).json({ message: error.message });
     }
-}   
+}
+
+export const getRequestsBySearch = async (req, res) => {
+    const { searchQuery, tags } = req.query;
+
+    try {
+        const title = new RegExp(searchQuery, "i");
+
+        const requests = await RequestMessage.find({ $or: [ { title }, { tags: { $in: tags.split(',') } } ]});
+
+        res.json({ data: requests });
+    } catch (error) {    
+        res.status(404).json({ message: error.message });
+    }
+}
 
 export const createRequest = async (req,res)=>{
     const request = req.body;

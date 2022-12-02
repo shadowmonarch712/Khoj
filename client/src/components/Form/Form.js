@@ -19,7 +19,7 @@ const Form = ({currentId, setCurrentId}) => {
     message: "",
     tags: "",
   });
-  const request = useSelector((state)=>currentId ? state.requests.find((p)=>p._id===currentId):null);
+  const request = useSelector((state)=>currentId ? state.requests.requests.find((p)=>p._id===currentId):null);
   const classes = useStyles();
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -69,7 +69,7 @@ const Form = ({currentId, setCurrentId}) => {
       });
   };
   return (
-    <Paper className="{classes.paper">
+    <Paper className="{classes.paper" elevation={6}>
       <form
         autoComplete="off"
         noValidate
