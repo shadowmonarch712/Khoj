@@ -69,12 +69,13 @@ const Form = ({currentId, setCurrentId}) => {
       });
   };
   return (
-    <Paper className="{classes.paper" elevation={6}>
+    <Paper className={classes.paper} elevation={6} >
       <form
         autoComplete="off"
         noValidate
         className={classes.form}
         onSubmit={handleSubmit}
+        style={{ margin: "5px 0", }}
       >
         <Typography variant="h6">{ currentId ? 'Edit' : 'Create' } the add</Typography>
         <TextField
@@ -82,6 +83,7 @@ const Form = ({currentId, setCurrentId}) => {
           variant="outlined"
           label="name"
           fullWidth
+          style={{ margin: "5px 0",padding: "0px 10px"}}
           value={requestData.name}
           onChange={(e) =>
             setRequestData({ ...requestData, name: e.target.value })
@@ -91,6 +93,7 @@ const Form = ({currentId, setCurrentId}) => {
         </TextField>
         <TextField
           name="title"
+          style={{ margin: "5px 0",padding: "0px 10px"}}
           variant="outlined"
           label="title"
           fullWidth
@@ -104,6 +107,7 @@ const Form = ({currentId, setCurrentId}) => {
           variant="outlined"
           label="message"
           fullWidth
+          style={{ margin: "5px 0",padding: "0px 10px"}}
           value={requestData.message}
           onChange={(e) =>
             setRequestData({ ...requestData, message: e.target.value })
@@ -116,6 +120,7 @@ const Form = ({currentId, setCurrentId}) => {
           variant="outlined"
           label="tags"
           fullWidth
+          style={{ margin: "5px 0",padding: "0px 10px"}}
           value={requestData.tags}
           onChange={(e) => setRequestData({ ...requestData, tags: e.target.value.split(',') })}
         >
@@ -125,19 +130,21 @@ const Form = ({currentId, setCurrentId}) => {
           <Button
             className={classes.buttonSubmit}
             variant="container"
-            color="primary"
+            color="error"
             size="large"
             type="submit"
             fullWidth
+            style={{ margin: "5px 0",padding: "0px 10px"}}
           >
             Submit
           </Button>
           <Button
             variant="contained"
-            color="secondary"
+            color="primary"
             size="small"
             onClick={clear}
             fullWidth
+            style={{ margin: "5px 0",padding: "0px 10px"}}
           >
             clear{" "}
           </Button>

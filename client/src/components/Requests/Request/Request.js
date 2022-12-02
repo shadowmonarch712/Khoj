@@ -42,10 +42,10 @@ const Request = ({ request, setCurrentId }) => {
       </Fab> */}
       <CardMedia
         className={classes.media}
-        image={
-          request.selectedFile ||
-          "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
-        }
+        // image={
+        //   request.selectedFile ||
+        //   "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
+        // }
         title={request.title}
       />
       <div className={classes.overlay}>
