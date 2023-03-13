@@ -12,7 +12,7 @@ export default makeStyles(() => ({
     padding: '10px 50px',
   },
   heading: {
-    color: 'rgba(0,183,255, 1)',
+    color: '#336576',
     textDecoration: 'none',
     alignItems: 'center',
   },

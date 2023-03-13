@@ -55,8 +55,7 @@ const Request = ({ request, setCurrentId }) => {
           {moment(request.createdAt).fromNow()}
         </Typography>
       </div>
-      {(user?.result?.googleId === request?.creator ||
-        user?.result?.id === request?.creator) && (
+      {(user?.result?.id === request?.creator) && (
         <div className={classes.overlay2}>
           <Button
             onClick={() => setCurrentId(request._id)}
@@ -68,10 +67,10 @@ const Request = ({ request, setCurrentId }) => {
         </div>
       )}
       <div className={classes.details}>
-        {/* <Typography variant="body2" color="textSecondary" component="h2">{request.tags.map((tag) => `#${tag} `)}</Typography> */}
-        <Typography variant="body2" color="textSecondary" component="h2">
+        <Typography variant="body2" color="textSecondary" component="h2">{request.tags.map((tag) => `#${tag} `)}</Typography>
+        {/* <Typography variant="body2" color="textSecondary" component="h2">
           {request.tags}
-        </Typography>
+        </Typography> */}
       </div>
       <Typography
         className={classes.title}

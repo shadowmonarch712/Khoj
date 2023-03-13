@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
+import Creator from "./components/Creator/Creator";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import RequestDetails from "./components/RequestDetails/RequestDetails";
 
@@ -26,6 +27,7 @@ const App = () => {
             <Route path="/requests" exact element={<Home />} />
             <Route path="/requests/search" exact element={<Home />} />
             <Route path="/requests/:id" exact element={<RequestDetails/>} />
+            <Route path="/creators/:name" exact element={<Creator/>} />
             <Route
               path="/auth"
               exact

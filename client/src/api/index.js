@@ -24,6 +24,7 @@ export const fetchRequestsBySearch = (searchQuery) => API.get(`/requests/search?
 export const createRequest = (newRequest) => API.post('/requests', newRequest);
 export const updateRequest = (id, updatedRequest) => API.patch(`/requests/${id}`, updatedRequest);
 export const deleteRequest = (id) => API.delete(`/requests/${id}`);
+export const fetchRequestsByCreator = (name) => API.get(`/requests/creator?name=${name}`);
 export const comment = (value, id) => API.post(`/requests/${id}/commentRequest`, { value });
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);

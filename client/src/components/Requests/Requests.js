@@ -53,7 +53,7 @@ const Requests = ({ setCurrentId }) => {
   const { requests, isLoading } = useSelector((state) => state.requests);
   const classes = useStyles();
 
-  if (!requests.length && !isLoading) return 'No requests';
+  if (!requests.length && !isLoading) return 'No requests are available. Please add one!';
 
   return (
     isLoading ? <CircularProgress /> : (

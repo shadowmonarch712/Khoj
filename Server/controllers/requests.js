@@ -17,8 +17,7 @@ export const getRequests = async (req, res) => {
     
     try {
         const LIMIT = 8;
-        const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
-    
+        const startIndex = (Number(page) - 1) * LIMIT;     
         const total = await RequestMessage.countDocuments({});
         const requests = await RequestMessage.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
 
@@ -64,6 +63,18 @@ export const getRequest = async (req, res) => {
         
         res.status(200).json(request);
     } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+export const getRequestsByCreator = async (req, res) => {
+    const { name } = req.query;
+
+    try {
+        const requests = await PostMessage.find({ name });
+
+        res.json({ data: requests });
+    } catch (error) {    
         res.status(404).json({ message: error.message });
     }
 }

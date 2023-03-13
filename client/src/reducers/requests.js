@@ -1,3 +1,5 @@
+
+
 // import { FETCH_ALL, CREATE, UPDATE, DELETE} from '../constants/actionTypes';
 
 // export default (requests = [], action) => {
@@ -16,9 +18,7 @@
 //       return requests;
 //   }
 // };
-
-
-import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_REQUEST, CREATE, UPDATE, DELETE,COMMENT} from '../constants/actionTypes';
+import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_BY_CREATOR,FETCH_REQUEST, CREATE, UPDATE, DELETE,COMMENT} from '../constants/actionTypes';
 
 export default (state = { isLoading: true, requests: [] }, action) => {
   switch (action.type) {
@@ -35,6 +35,8 @@ export default (state = { isLoading: true, requests: [] }, action) => {
       };
     case FETCH_BY_SEARCH:
       return { ...state, requests: action.payload.data };
+    case FETCH_BY_CREATOR:
+      return { ...state, posts: action.payload.data };  
     case FETCH_REQUEST:
       return { ...state, request: action.payload.request };
       
