@@ -6,6 +6,7 @@ import getRequests from './actions/requests';
 import Requests from './components/Requests/Requests.js';
 import Form from './components/Form/Form.js';
 import useStyles from './styles';
+import ResponsiveAppBar from "./components/appbar";
 
 const App = () => {
    const [currentId, setCurrentId] = useState(null);
@@ -18,11 +19,12 @@ const App = () => {
 
   return (
     <Container maxWidth="lg">
-      <AppBar className={classes.appBar} position="static" color="inherit">
+      <ResponsiveAppBar/>
+      {/* <AppBar className={classes.appBar} position="static" color="inherit">
         <Typography className={classes.heading} variant="h2" align="center">
-          KHOJ
+      
         </Typography>
-      </AppBar>
+      </AppBar> */}
       <Grow in>
         <Container>
           <Grid

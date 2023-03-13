@@ -43,6 +43,7 @@ const Form = ({currentId, setCurrentId}) => {
         tags: "",
       });
   };
+  console.log(requestData)
   return (
     <Paper className="{classes.paper">
       <form
