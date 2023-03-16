@@ -15,15 +15,29 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import moment from 'moment';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useDispatch } from 'react-redux';
+import {deleteRequest } from '../../../actions/requests';
+import hackathonImage from '../../../image/hackathon.jpg';
+import { padding } from '@mui/system';
 
-export default function RecipeReviewCard({ request, setCurrentId }) {
+export default function RecipeReviewCard({ request, setCurrentId, setOpenDialog }) {
+  const editAction = () => {
+    setCurrentId(request._id);
+    setOpenDialog(true);
+  }
+  const dispatch = useDispatch();
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, borderRadius: "15px", backgroundColor: "#abcdd7", padding: "3px"}}>
       <CardHeader
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
+          <IconButton aria-label="edit"
+            onClick={
+              editAction
+            }>
+            <EditIcon />
           </IconButton>
         }
         title={request.title}
@@ -32,7 +46,7 @@ export default function RecipeReviewCard({ request, setCurrentId }) {
       <CardMedia
         component="img"
         height="194"
-        image="/static/images/cards/paella.jpg"
+        image={hackathonImage}
         alt="Paella dish"
       />
       <CardContent>
@@ -46,12 +60,15 @@ export default function RecipeReviewCard({ request, setCurrentId }) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <FavoriteIcon/>
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        </CardActions>
-    </Card>
+        <IconButton aria-label="share" onClick={() => dispatch(deleteRequest(request._id))}>
+          <DeleteIcon />
+        </IconButton>
+      </CardActions>
+    </Card >
   );
 }

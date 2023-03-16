@@ -1,6 +1,7 @@
 import mongoose, { Mongoose } from "mongoose";
 
 const requestSchema = mongoose.Schema({
+    name: String,
     title: String,
     message: String,
     creator: String,
